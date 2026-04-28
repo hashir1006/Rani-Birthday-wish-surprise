@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>For Rani ❤️ — A friendship Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Dancing+Script:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   THEME VARIABLES — change colors / content easily here
+   ============================================================ */
+:root{
+  --bg-deep:#0a0413;
+  --bg-1:#140725;
+  --bg-2:#1d0a2e;
+  --bg-3:#2a0f3d;
+  --pink:#ff6fb5;
+  --pink-soft:#ffb3d9;
+  --rose:#ff4d8f;
+  --rose-gold:#e8b4a0;
+  --gold:#f5c97b;
+  --purple:#a855f7;
+  --purple-deep:#7c3aed;
+  --glass:rgba(255,255,255,0.06);
+  --glass-strong:rgba(255,255,255,0.10);
+  --glass-border:rgba(255,255,255,0.18);
+  --text:#f7eaf3;
+  --text-soft:#d8c3d4;
+  --shadow-glow:0 0 40px rgba(255,111,181,0.35);
+  --shadow-deep:0 20px 60px rgba(0,0,0,0.55);
+  --font-serif:'Cormorant Garamond', serif;
+  --font-script:'Dancing Script', cursive;
+  --font-sans:'Poppins', sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{
+  background:var(--bg-deep);
+  color:var(--text);
+  font-family:var(--font-sans);
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+}
+body{
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(168,85,247,0.18), transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(255,77,143,0.18), transparent 50%),
+    linear-gradient(180deg, var(--bg-deep), var(--bg-1) 40%, var(--bg-2));
+  min-height:100vh;
+}
+img{max-width:100%;display:block;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+
+/* ============================================================
+   LOADING SCREEN
+   ============================================================ */
+#loader{
+  position:fixed;inset:0;z-index:9999;
+  background:radial-gradient(circle at center, #1a0828, #05010d);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity 1s ease, visibility 1s;
+}
+#loader.hidden{opacity:0;visibility:hidden;}
+.loader-heart{
+  width:80px;height:80px;position:relative;
+  animation:beat 1.2s ease-in-out infinite;
+  filter:drop-shadow(0 0 30px rgba(255,111,181,0.7));
+}
+.loader-heart svg{width:100%;height:100%;}
+@keyframes beat{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.18);}
+}
+.loader-text{
+  margin-top:24px;
+  font-family:var(--font-script);
+  font-size:1.6rem;
+  color:var(--pink-soft);
+  letter-spacing:1px;
+  opacity:0.9;
+  animation:fadePulse 2s ease-in-out infinite;
+}
+@keyframes fadePulse{0%,100%{opacity:0.5;}50%{opacity:1;}}
+.loader-bar{
+  margin-top:30px;width:200px;height:2px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;
+}
+.loader-bar::after{
+  content:"";display:block;height:100%;width:40%;
+  background:linear-gradient(90deg,transparent,var(--pink),transparent);
+  animation:loadSlide 1.5s ease-in-out infinite;
+}
+@keyframes loadSlide{0%{transform:translateX(-100%);}100%{transform:translateX(350%);}}
+
+/* ============================================================
+   STARFIELD / PARTICLES (global background canvas)
+   ============================================================ */
+#stars{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+}
+
+/* ============================================================
+   SCROLL CONTAINER + SCENES
+   ============================================================ */
+main{
+  position:relative;z-index:1;
+  scroll-snap-type:y mandatory;
+  height:100vh;overflow-y:scroll;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+}
+main::-webkit-scrollbar{width:0;background:transparent;}
+.scene{
+  scroll-snap-align:start;
+  min-height:100vh;
+  width:100%;
+  display:flex;align-items:center;justify-content:center;
+  padding:60px 20px;
+  position:relative;
+  overflow:hidden;
+}
+.scene-inner{
+  width:100%;max-width:1100px;
+  position:relative;z-index:2;
+  text-align:center;
+}
+
+/* Glass card */
+.glass{
+  background:var(--glass);
+  backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  border:1px solid var(--glass-border);
+  border-radius:24px;
+  box-shadow:var(--shadow-deep);
+}
+
+/* Typography helpers */
+.eyebrow{
+  display:inline-block;
+  font-family:var(--font-script);
+  color:var(--pink-soft);
+  font-size:1.4rem;
+  letter-spacing:1px;
+  margin-bottom:8px;
+  text-shadow:0 0 20px rgba(255,179,217,0.6);
+}
+.title{
+  font-family:var(--font-serif);
+  font-weight:500;
+  font-size:clamp(2.2rem, 6vw, 4.5rem);
+  line-height:1.1;
+  letter-spacing:0.5px;
+  background:linear-gradient(135deg,#fff 0%,var(--pink-soft) 50%,var(--rose-gold) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.subtitle{
+  font-family:var(--font-serif);
+  font-style:italic;
+  font-size:clamp(1.1rem, 2.4vw, 1.5rem);
+  color:var(--text-soft);
+  margin-top:18px;line-height:1.6;
+}
+
+/* Reveal animations */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1.2s ease, transform 1.2s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal.delay-1{transition-delay:.2s;}
+.reveal.delay-2{transition-delay:.5s;}
+.reveal.delay-3{transition-delay:.8s;}
+.reveal.delay-4{transition-delay:1.1s;}
+.reveal.delay-5{transition-delay:1.4s;}
+
+/* ============================================================
+   SCENE 1 — GRAND INTRO
+   ============================================================ */
+#scene1 .scene-inner{padding:20px;}
+.intro-name{
+  font-family:var(--font-script);
+  font-size:clamp(3rem, 9vw, 6rem);
+  background:linear-gradient(135deg,#ffd1e8 0%,#ff6fb5 50%,#a855f7 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 30px rgba(255,111,181,0.5));
+  margin-top:14px;
+}
+.scroll-hint{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  color:var(--text-soft);font-size:.85rem;letter-spacing:3px;text-transform:uppercase;
+  opacity:.7;animation:bobUp 2.4s ease-in-out infinite;
+}
+.scroll-hint span{display:block;width:1px;height:36px;margin:8px auto 0;background:linear-gradient(var(--pink),transparent);}
+@keyframes bobUp{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,8px);}}
+
+/* ============================================================
+   SCENE 2 — TIMELINE
+   ============================================================ */
+.timeline{
+  margin-top:50px;position:relative;
+  display:flex;flex-direction:column;gap:30px;
+  max-width:720px;margin-left:auto;margin-right:auto;
+}
+.timeline::before{
+  content:"";position:absolute;left:24px;top:10px;bottom:10px;width:2px;
+  background:linear-gradient(var(--pink),var(--purple),transparent);
+  box-shadow:0 0 12px rgba(255,111,181,0.5);
+}
+.tl-item{
+  display:flex;gap:22px;align-items:flex-start;text-align:left;
+  padding:18px 22px;border-radius:18px;
+}
+.tl-dot{
+  width:14px;height:14px;border-radius:50%;
+  background:radial-gradient(circle,var(--pink),var(--rose));
+  box-shadow:0 0 18px var(--pink);
+  margin-top:6px;flex-shrink:0;margin-left:18px;
+}
+.tl-content h3{
+  font-family:var(--font-serif);font-size:1.5rem;color:var(--pink-soft);font-weight:500;
+}
+.tl-content p{color:var(--text-soft);margin-top:4px;line-height:1.55;font-size:.98rem;}
+
+/* ============================================================
+   SCENE 3 — CHAT BUBBLES
+   ============================================================ */
+.bubble-stage{
+position:relative;
+height:720px;
+max-width:700px;
+margin:40px auto 0;
+}
+.bubble{
+position:absolute;
+padding:14px 20px;
+border-radius:22px;
+font-size:.95rem;
+color:#fff;
+max-width:62%;
+line-height:1.5;
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.15);
+animation:floatUp 6s ease-in-out infinite;
+box-shadow:0 8px 24px rgba(255,77,143,0.2);
+}
+.bubble.left{background:linear-gradient(135deg,rgba(168,85,247,0.6),rgba(124,58,237,0.4));border-bottom-left-radius:6px;}
+.bubble.right{background:linear-gradient(135deg,rgba(255,111,181,0.7),rgba(255,77,143,0.5));border-bottom-right-radius:6px;}
+@keyframes floatUp{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-12px);}
+}
+.heart-float{
+  position:absolute;font-size:1.4rem;color:var(--pink);
+  filter:drop-shadow(0 0 8px var(--pink));
+  animation:hfloat 5s ease-in-out infinite;
+  opacity:.85;
+}
+@keyframes hfloat{
+  0%{transform:translateY(0) scale(1);opacity:.85;}
+  50%{transform:translateY(-30px) scale(1.15);opacity:1;}
+  100%{transform:translateY(0) scale(1);opacity:.85;}
+}
+
+/* ============================================================
+   SCENE 4 — GALLERY
+   ============================================================ */
+.gallery{
+  margin-top:50px;
+  display:grid;gap:22px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+}
+.g-card{
+  position:relative;border-radius:20px;overflow:hidden;
+  aspect-ratio:3/4;
+  transform:translateY(30px);opacity:0;
+  transition:opacity .9s ease, transform .9s ease, box-shadow .4s;
+  box-shadow:var(--shadow-deep);
+  cursor:pointer;
+}
+.g-card.in{opacity:1;transform:translateY(0);}
+.g-card img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .8s ease, filter .8s;
+  filter:saturate(1.05) brightness(0.92);
+}
+.g-card:hover img{transform:scale(1.08);filter:saturate(1.15) brightness(1);}
+.g-card::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 50%,rgba(10,4,19,0.85));
+}
+.g-cap{
+  position:absolute;left:0;right:0;bottom:18px;
+  z-index:2;text-align:center;
+  font-family:var(--font-script);
+  font-size:1.5rem;color:#fff;
+  text-shadow:0 2px 12px rgba(0,0,0,0.6);
+}
+/* Tilt on hover */
+.g-card{transition:transform .4s ease;}
+.g-card:hover{transform:translateY(-8px) rotateX(4deg) rotateY(-4deg);}
+
+/* ============================================================
+   SCENE 5 — CHAT RAIN
+   ============================================================ */
+#scene5{padding-top:30px;padding-bottom:30px;}
+.rain-stage{
+  position:relative;width:100%;
+  height:80vh;min-height:520px;
+  margin-top:30px;
+  border-radius:24px;
+  overflow:hidden;
+  background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.04));
+  border:1px solid var(--glass-border);
+}
+.chat-card{
+  position:absolute;top:-160px;
+  width:170px;height:230px;
+  border-radius:14px;
+  background:linear-gradient(160deg,#1a0a2a,#2a1242);
+  border:1px solid rgba(255,255,255,0.12);
+  box-shadow:0 12px 30px rgba(0,0,0,0.5),0 0 20px rgba(255,111,181,0.15);
+  padding:10px;
+  cursor:pointer;
+  overflow:hidden;
+  transition:transform .3s, box-shadow .3s;
+}
+.chat-card:hover{box-shadow:0 14px 40px rgba(255,77,143,0.4);}
+.chat-card .cc-head{
+  display:flex;align-items:center;gap:8px;
+  padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.cc-avatar{
+  width:26px;height:26px;border-radius:50%;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  flex-shrink:0;
+}
+.cc-name{font-size:.78rem;font-weight:500;color:#fff;}
+.cc-name small{display:block;color:var(--text-soft);font-size:.62rem;font-weight:300;}
+.cc-body{padding-top:8px;display:flex;flex-direction:column;gap:6px;}
+.cc-msg{
+  font-size:.7rem;padding:6px 9px;border-radius:10px;line-height:1.3;color:#fff;
+}
+.cc-msg.them{background:rgba(168,85,247,0.4);align-self:flex-start;border-bottom-left-radius:3px;max-width:85%;}
+.cc-msg.me{background:linear-gradient(135deg,var(--pink),var(--rose));align-self:flex-end;border-bottom-right-radius:3px;max-width:85%;}
+
+/* Modal */
+#chat-modal{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(5,1,13,0.85);backdrop-filter:blur(18px);
+  display:none;align-items:center;justify-content:center;
+  padding:20px;
+}
+#chat-modal.show{display:flex;animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+#chat-modal .modal-card{
+  position:relative;width:100%;max-width:380px;
+  background:linear-gradient(160deg,#1a0a2a,#2a1242);
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,0.15);
+  padding:22px;
+  box-shadow:var(--shadow-glow),var(--shadow-deep);
+  animation:zoomIn .35s cubic-bezier(.2,1.2,.4,1);
+}
+@keyframes zoomIn{from{transform:scale(.7);opacity:0;}to{transform:scale(1);opacity:1;}}
+#chat-modal .close-btn{
+  position:absolute;top:-14px;right:-14px;
+  width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg,var(--pink),var(--rose));
+  color:#fff;font-size:1.2rem;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 20px rgba(255,77,143,0.5);
+}
+
+/* ============================================================
+   SCENE 6 — WHY YOU ARE SPECIAL
+   ============================================================ */
+.special-list{
+  margin-top:50px;display:flex;flex-direction:column;gap:24px;
+}
+.special-line{
+  font-family:var(--font-serif);
+  font-style:italic;
+  font-size:clamp(1.4rem, 3.5vw, 2.4rem);
+  color:var(--text);
+  opacity:0;transform:translateY(20px);
+  transition:opacity 1s ease, transform 1s ease;
+}
+.special-line.in{opacity:1;transform:translateY(0);}
+.special-line span{
+  background:linear-gradient(135deg,var(--pink-soft),var(--rose-gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  font-weight:600;
+}
+
+/* ============================================================
+   SCENE 7 — BIRTHDAY FINALE
+   ============================================================ */
+#scene7{
+  background:radial-gradient(ellipse at center, rgba(255,77,143,0.18), transparent 60%);
+}
+.cake{
+  width:200px;height:auto;margin:30px auto 20px;position:relative;
+  filter:drop-shadow(0 10px 30px rgba(255,111,181,0.5));
+}
+.cake svg{width:100%;height:auto;}
+.flame{transform-origin:center bottom;animation:flicker 1.2s ease-in-out infinite alternate;}
+@keyframes flicker{
+  0%{transform:scale(1) rotate(-2deg);opacity:.9;}
+  100%{transform:scale(1.15) rotate(2deg);opacity:1;}
+}
+#fireworks{position:absolute;inset:0;pointer-events:none;z-index:1;}
+.final-msg{
+  margin-top:20px;
+  font-family:var(--font-serif);
+  font-size:clamp(1.2rem, 2.6vw, 1.7rem);
+  line-height:1.6;color:var(--text-soft);
+}
+.final-msg strong{
+  display:block;
+  font-family:var(--font-script);
+  font-size:clamp(2rem, 5vw, 3rem);
+  background:linear-gradient(135deg,#fff,var(--pink-soft),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:14px;
+  filter:drop-shadow(0 0 20px rgba(255,111,181,0.4));
+}
+
+/* ============================================================
+   SCENE 8 — SURPRISE BUTTON
+   ============================================================ */
+.surprise-btn{
+  margin-top:40px;
+  display:inline-flex;align-items:center;gap:12px;
+  padding:18px 42px;
+  font-family:var(--font-serif);font-size:1.3rem;font-weight:500;letter-spacing:1px;
+  color:#fff;
+  background:linear-gradient(135deg,var(--rose),var(--purple-deep));
+  border-radius:60px;
+  box-shadow:0 10px 40px rgba(255,77,143,0.4),inset 0 0 20px rgba(255,255,255,0.1);
+  position:relative;overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+}
+.surprise-btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 15px 50px rgba(255,77,143,0.6);}
+.surprise-btn::before{
+  content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+  animation:shimmer 3s ease-in-out infinite;
+}
+@keyframes shimmer{0%{left:-100%;}50%,100%{left:100%;}}
+
+#surprise-overlay{
+  position:fixed;inset:0;z-index:300;
+  background:radial-gradient(circle at center,rgba(255,77,143,0.4),rgba(5,1,13,0.95));
+  backdrop-filter:blur(10px);
+  display:none;align-items:center;justify-content:center;
+  flex-direction:column;text-align:center;padding:30px;
+}
+#surprise-overlay.show{display:flex;animation:fadeIn .6s ease;}
+.surprise-text{
+  font-family:var(--font-script);
+  font-size:clamp(1.8rem,5vw,3rem);
+  background:linear-gradient(135deg,#fff,var(--pink-soft));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 20px rgba(255,111,181,0.6));
+  z-index:2;
+  animation:zoomIn 1s ease;
+}
+.heart-rain{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.heart-rain span{
+  position:absolute;top:-30px;font-size:1.6rem;color:var(--pink);
+  filter:drop-shadow(0 0 10px var(--pink));
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);opacity:0;}
+}
+.close-surprise{
+  position:absolute;top:20px;right:20px;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,0.15);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  z-index:5;font-size:1.2rem;
+}
+
+/* Confetti canvas */
+#confetti{position:absolute;inset:0;pointer-events:none;z-index:2;}
+
+/* ============================================================
+   FLOATING HEARTS BG (Scene 7)
+   ============================================================ */
+.float-hearts{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;}
+.float-hearts span{
+  position:absolute;bottom:-20px;font-size:1.2rem;color:var(--pink);opacity:.6;
+  animation:rise linear infinite;
+}
+@keyframes rise{
+  0%{transform:translateY(0) translateX(0) scale(1);opacity:0;}
+  10%{opacity:.8;}
+  100%{transform:translateY(-110vh) translateX(40px) scale(1.3);opacity:0;}
+}
+
+/* ============================================================
+   RESPONSIVE TWEAKS
+   ============================================================ */
+@media (max-width:640px){
+  .timeline::before{left:18px;}
+  .tl-dot{margin-left:12px;}
+  .tl-item{padding:14px;gap:14px;}
+  .bubble-stage{height:380px;}
+  .bubble{font-size:.85rem;padding:10px 14px;}
+  .gallery{grid-template-columns:repeat(2,1fr);gap:14px;}
+  .g-cap{font-size:1.1rem;}
+  .chat-card{width:140px;height:200px;}
+  .surprise-btn{padding:16px 32px;font-size:1.1rem;}
+}
+@media (max-width:380px){
+  .gallery{grid-template-columns:1fr;}
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     LOADING SCREEN
+     ============================================================ -->
+<div id="loader">
+  <div class="loader-heart">
+    <svg viewBox="0 0 32 29.6" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lg" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stop-color="#ff6fb5"/>
+          <stop offset="100%" stop-color="#a855f7"/>
+        </linearGradient>
+      </defs>
+      <path fill="url(#lg)" d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2 c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+    </svg>
+  </div>
+  <div class="loader-text">Preparing something beautiful for meri Raniiiii 💗 </div>
+  <div class="loader-bar"></div>
+</div>
+
+<!-- Global star canvas -->
+<canvas id="stars"></canvas>
+
+<!-- ============================================================
+     MAIN STORY
+     ============================================================ -->
+<main id="main">
+
+  <!-- SCENE 1 — INTRO -->
+  <section class="scene" id="scene1">
+    <div class="scene-inner">
+      <div class="reveal">
+        <div class="eyebrow">A friendship letter, in motion</div>
+      </div>
+      <div class="reveal delay-1">
+        <h1 class="title">Some stories are<br/>written by fate…</h1>
+      </div>
+      <div class="reveal delay-3">
+        <p class="subtitle">And this one began with</p>
+        <div class="intro-name">Rani 💗</div>
+      </div>
+    </div>
+    <div class="scroll-hint">Scroll karo Sweetuuu<span></span></div>
+  </section>
+
+  <!-- SCENE 2 — HOW WE MET -->
+  <section class="scene" id="scene2">
+    <div class="scene-inner">
+      <div class="reveal"><div class="eyebrow">Chapter One</div></div>
+      <div class="reveal delay-1"><h2 class="title">How We Met</h2></div>
+      <div class="reveal delay-2">
+        <p class="subtitle">One ordinary day became unforgettable<br/>when I texted u for the first time on whatsapp</p>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item glass reveal delay-2">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <h3>The First Glance</h3>
+            <p>Out of a million faces, the world somehow chose yours for me.</p>
+          </div>
+        </div>
+        <div class="tl-item glass reveal delay-3">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <h3>The First Word</h3>
+            <p>A simple academics notes chats — and somehow, everything changed.</p>
+          </div>
+        </div>
+        <div class="tl-item glass reveal delay-4">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <h3>The First Spark</h3>
+            <p>That moment our laughter met, time decided to slow down a little.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 3 — FIRST CONVERSATIONS -->
+ <!-- SCENE 3 — FIRST CONVERSATIONS -->
+<section class="scene" id="scene3">
+  <div class="scene-inner">
+    <div class="reveal"><div class="eyebrow">Chapter Two</div></div>
+    <div class="reveal delay-1">
+      <h2 class="title">First Conversations</h2>
+    </div>
+
+    <div class="reveal delay-2">
+      <p class="subtitle">From simple Salam to endless conversations…</p>
+    </div>
+
+    <div class="bubble-stage reveal delay-2" id="bubbleStage">
+
+      <div class="bubble left" style="top:2%;left:4%;">Assalamualaikum</div>
+
+      <div class="bubble right" style="top:12%;right:4%;">Walekumassalam</div>
+
+      <div class="bubble left" style="top:23%;left:6%;">Jazakallahu khair bht bht aap konse batch mai ho ?</div>
+
+      <div class="bubble right" style="top:35%;right:6%;">C</div>
+
+      <div class="bubble left" style="top:45%;left:6%;">Aaj aap aaye thein ?</div>
+
+      <div class="bubble right" style="top:56%;right:4%;">Nhi actually meri 3 din se tabiyath kharab thi tho nahi aya</div>
+
+      <div class="bubble right" style="top:68%;right:6%;">Kalse aauga in shah allah</div>
+
+      <div class="bubble left" style="top:79%;left:5%;">Accha hum se milna phir hum aa nahi rahe thein college aaj aaye hai thoda awkward feel horaha tha</div>
+
+      <div class="bubble left" style="top:90%;left:8%;">isliye</div>
+
+      <div class="bubble right" style="top:98%;right:8%;">thikeee</div>
+
+      <span class="heart-float" style="top:18%;left:80%;">❤</span>
+      <span class="heart-float" style="top:52%;left:6%;">❤</span>
+      <span class="heart-float" style="top:84%;left:75%;">❤</span>
+
+    </div>
+  </div>
+</section>
+
+  <!-- SCENE 4 — GALLERY -->
+  <section class="scene" id="scene4">
+    <div class="scene-inner">
+      <div class="reveal"><div class="eyebrow">Chapter Three</div></div>
+      <div class="reveal delay-1"><h2 class="title">Beautiful Memories</h2></div>
+      <div class="reveal delay-2"><p class="subtitle">Every frame, a feeling. Every feeling, you.</p></div>
+
+      <div class="gallery" id="gallery">
+        <!-- Image URLs are royalty-free Unsplash links. Replace with /images/yourfile.jpg later. -->
+        <div class="g-card">
+          <img loading="lazy" src="Rani Birthday surprise\princess.jpeg" alt="Rani">
+          <div class="g-cap">Your smile</div>
+        </div>
+        <div class="g-card">
+          <img loading="lazy" src="Rani Birthday surprise\queen.jpeg" alt="Rani">
+          <div class="g-cap">Golden moments</div>
+        </div>
+        <div class="g-card">
+          <img loading="lazy" src="Rani Birthday surprise\WhatsApp Image 2026-04-27 at 3.06.10 PM.jpeg" alt="Rani">
+          <div class="g-cap">Soft evenings</div>
+        </div>
+        <div class="g-card">
+          <img loading="lazy" src="Rani Birthday surprise\Baccha.jpeg" alt="Rani">
+          <div class="g-cap">Memories we created</div>
+        </div>
+        <div class="g-card">
+          <img loading="lazy" src="Rani Birthday surprise\beauty.jpeg" alt="Rani">
+          <div class="g-cap">Your kind of magic</div>
+        </div>
+        <div class="g-card">
+          <img loading="lazy" src="Rani Birthday surprise\Sweetuu.jpeg" alt="Rani">
+          <div class="g-cap">Forever &amp; a day</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 5 — CHAT RAIN -->
+  <section class="scene" id="scene5">
+    <div class="scene-inner">
+      <div class="reveal"><div class="eyebrow">Chapter Four</div></div>
+      <div class="reveal delay-1"><h2 class="title">Our Little Words</h2></div>
+      <div class="reveal delay-2"><p class="subtitle">A rain of memories — tap any to relive it.</p></div>
+
+      <div class="rain-stage reveal delay-2" id="rainStage"></div>
+    </div>
+  </section>
+
+  <!-- SCENE 6 — WHY YOU ARE SPECIAL -->
+  <section class="scene" id="scene6">
+    <div class="scene-inner">
+      <div class="reveal"><div class="eyebrow">Chapter Five</div></div>
+      <div class="reveal delay-1"><h2 class="title">Why You Are Special</h2></div>
+
+      <div class="special-list" id="specialList">
+        <div class="special-line">Your smile <span>heals chaos.</span></div>
+        <div class="special-line">Your presence <span>brings peace.</span></div>
+        <div class="special-line">Your heart is <span>rare.</span></div>
+        <div class="special-line">You made life <span>brighter.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 7 — BIRTHDAY FINALE -->
+  <section class="scene" id="scene7">
+    <div class="float-hearts" id="floatHearts"></div>
+    <canvas id="fireworks"></canvas>
+    <canvas id="confetti"></canvas>
+
+    <div class="scene-inner">
+      <div class="reveal"><div class="eyebrow">The Big Day</div></div>
+      <div class="reveal delay-1"><h2 class="title">It's Your Day, my Princess 👑</h2></div>
+
+      <div class="cake reveal delay-2">
+        <svg viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+          <!-- candle flame -->
+          <ellipse class="flame" cx="100" cy="22" rx="6" ry="12" fill="#ffd27a"/>
+          <ellipse class="flame" cx="100" cy="24" rx="3" ry="7" fill="#fff7d6"/>
+          <!-- candle -->
+          <rect x="96" y="32" width="8" height="22" rx="2" fill="#ff6fb5"/>
+          <!-- top tier -->
+          <rect x="60" y="56" width="80" height="30" rx="6" fill="url(#tg1)"/>
+          <!-- middle tier -->
+          <rect x="40" y="86" width="120" height="36" rx="8" fill="url(#tg2)"/>
+          <!-- bottom tier -->
+          <rect x="22" y="122" width="156" height="44" rx="10" fill="url(#tg3)"/>
+          <!-- drips -->
+          <path d="M40,86 q10,12 20,0 q10,12 20,0 q10,12 20,0 q10,12 20,0 q10,12 20,0 q10,12 20,0" fill="#ffb3d9" opacity=".9"/>
+          <path d="M22,122 q12,14 24,0 q12,14 24,0 q12,14 24,0 q12,14 24,0 q12,14 24,0 q12,14 24,0" fill="#ff6fb5" opacity=".9"/>
+          <!-- decorations -->
+          <circle cx="50" cy="146" r="4" fill="#fff"/>
+          <circle cx="80" cy="146" r="4" fill="#fff"/>
+          <circle cx="110" cy="146" r="4" fill="#fff"/>
+          <circle cx="140" cy="146" r="4" fill="#fff"/>
+          <defs>
+            <linearGradient id="tg1" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffd1e8"/><stop offset="1" stop-color="#ff6fb5"/></linearGradient>
+            <linearGradient id="tg2" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#e8b4a0"/><stop offset="1" stop-color="#c97a7a"/></linearGradient>
+            <linearGradient id="tg3" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#a855f7"/><stop offset="1" stop-color="#5b21b6"/></linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="final-msg reveal delay-3">
+        <strong>Happy Birthday meri Rani ❤️</strong>
+        No matter where life goes,<br/>you’ll always be special for me forever.
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 8 — SURPRISE -->
+  <section class="scene" id="scene8">
+    <div class="scene-inner">
+      <div class="reveal"><div class="eyebrow">One last thing…</div></div>
+      <div class="reveal delay-1"><h2 class="title">A Little Surprise</h2></div>
+      <div class="reveal delay-2"><p class="subtitle">Just for you, Rani.</p></div>
+
+      <button class="surprise-btn reveal delay-3" id="surpriseBtn">
+        ✨ Tap for Surprise
+      </button>
+    </div>
+  </section>
+</main>
+
+<!-- ============================================================
+     CHAT MODAL
+     ============================================================ -->
+<div id="chat-modal" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <button class="close-btn" id="closeModal" aria-label="Close">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SURPRISE OVERLAY
+     ============================================================ -->
+<div id="surprise-overlay">
+  <button class="close-surprise" id="closeSurprise" aria-label="Close">✕</button>
+  <div class="heart-rain" id="heartRain"></div>
+  <div class="surprise-text">I know I am not written for u and u will never choose me, but still my whole year since from the day we met, I was urs. mujhse kuch galti hogyi ho ya maine aapko sahi se treat nahi kiya hu tho maaf krdena, bass kcuh din aur phir mai kabhi pareshaan nahi kruga aapko. aapka wo naseeb jiski talaash mai aap ho itne waqt se jese hi aapse milega mai aapki zindagi se chala jauga hamesha k liye 🫂💗 but itna boluga I’d choose you in every lifetime ❤️. Khudahafiz, Fi amanillah Raniya 🫂💗</div>
+</div>
+
+<!-- Hidden audio (royalty-free romantic ambient) -->
+<audio id="bgm" loop preload="none">
+  <source src="Rani Birthday surprise\Co2 - Prateek Kuhad [128 Kbps]-(SongsPk.com.se).mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* ============================================================
+   CONFIG — easy content tweaks
+   ============================================================ */
+const CHAT_SCREENSHOTS = [
+  {name:"Rani 🌸", time:"11:47 PM", them:"You up? 🙈", me:"Always — for you."},
+  {name:"Rani 🌸", time:"2:13 AM",  them:"Tell me a secret.", me:"You're it. ❤️"},
+  {name:"Rani 🌸", time:"9:02 PM",  them:"Miss you 🥺",       me:"Same here, queen."},
+  {name:"Rani 🌸", time:"6:30 PM",  them:"What are you doing?", me:"Thinking of you, again."},
+  {name:"Rani 🌸", time:"12:01 AM", them:"Happy Monday 💜",   me:"Better, you said it."},
+  {name:"Rani 🌸", time:"3:45 PM",  them:"Send a song?",       me:"Our song. Always."},
+  {name:"Rani 🌸", time:"10:10 PM", them:"You make me smile.", me:"That's the goal. 💕"},
+  {name:"Rani 🌸", time:"8:20 AM",  them:"Good morning ☀️",   me:"Better now. You're awake."}
+];
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+window.addEventListener('load', ()=>{
+  setTimeout(()=>{ document.getElementById('loader').classList.add('hidden'); }, 1400);
+});
+
+/* ============================================================
+   STARFIELD (background)
+   ============================================================ */
+(function(){
+  const c = document.getElementById('stars');
+  const ctx = c.getContext('2d');
+  let stars=[];
+  function resize(){
+    c.width = innerWidth; c.height = innerHeight;
+    stars = [];
+    const count = Math.min(160, Math.floor(innerWidth*innerHeight/9000));
+    for(let i=0;i<count;i++){
+      stars.push({
+        x: Math.random()*c.width,
+        y: Math.random()*c.height,
+        r: Math.random()*1.4+0.2,
+        a: Math.random(),
+        s: Math.random()*0.02+0.005,
+        hue: Math.random()<0.3 ? 320 : 280
+      });
+    }
+  }
+  function tick(){
+    ctx.clearRect(0,0,c.width,c.height);
+    for(const st of stars){
+      st.a += st.s; if(st.a>1||st.a<0) st.s*=-1;
+      ctx.beginPath();
+      ctx.fillStyle = `hsla(${st.hue},90%,80%,${Math.abs(st.a)*0.9})`;
+      ctx.arc(st.x,st.y,st.r,0,Math.PI*2);
+      ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+  resize(); tick();
+  addEventListener('resize', resize);
+})();
+
+/* ============================================================
+   REVEAL ON SCROLL (IntersectionObserver)
+   ============================================================ */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('in'); }
+  });
+},{threshold:0.15});
+document.querySelectorAll('.reveal, .g-card').forEach(el=>io.observe(el));
+
+/* ============================================================
+   SCENE 6 — line-by-line reveal
+   ============================================================ */
+const specialIO = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const lines = e.target.querySelectorAll('.special-line');
+      lines.forEach((l,i)=> setTimeout(()=>l.classList.add('in'), i*700));
+      specialIO.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+specialIO.observe(document.getElementById('specialList'));
+
+/* ============================================================
+   SCENE 5 — CHAT RAIN
+   ============================================================ */
+(function(){
+  const stage = document.getElementById('rainStage');
+  const modal = document.getElementById('chat-modal');
+  const modalContent = document.getElementById('modalContent');
+  document.getElementById('closeModal').onclick = ()=> modal.classList.remove('show');
+  modal.addEventListener('click', e=>{ if(e.target===modal) modal.classList.remove('show'); });
+
+  function buildCardHTML(c){
+    return `
+      <div class="cc-head">
+        <div class="cc-avatar"></div>
+        <div class="cc-name">${c.name}<small>${c.time}</small></div>
+      </div>
+      <div class="cc-body">
+        <div class="cc-msg them">${c.them}</div>
+        <div class="cc-msg me">${c.me}</div>
+      </div>`;
+  }
+
+  function spawn(){
+    if(document.hidden) { setTimeout(spawn, 800); return; }
+    if(!isInView(stage)) { setTimeout(spawn, 800); return; }
+
+    const data = CHAT_SCREENSHOTS[Math.floor(Math.random()*CHAT_SCREENSHOTS.length)];
+    const card = document.createElement('div');
+    card.className = 'chat-card';
+    card.innerHTML = buildCardHTML(data);
+
+    const W = stage.clientWidth, H = stage.clientHeight;
+    const cardW = W < 640 ? 140 : 170;
+    card.style.left = (Math.random()*(W-cardW)) + 'px';
+    const rot = (Math.random()*30 - 15);
+    const dur = 8 + Math.random()*6;
+    card.style.transform = `rotate(${rot}deg)`;
+    card.style.transition = `top ${dur}s linear, transform ${dur}s linear`;
+    stage.appendChild(card);
+
+    requestAnimationFrame(()=>{
+      card.style.top = (H+50)+'px';
+      card.style.transform = `rotate(${rot + (Math.random()*60-30)}deg)`;
+    });
+
+    card.addEventListener('click', ()=>{
+      modalContent.innerHTML = buildCardHTML(data);
+      modal.classList.add('show');
+    });
+
+    setTimeout(()=>card.remove(), dur*1000+200);
+    setTimeout(spawn, 900 + Math.random()*900);
+  }
+  function isInView(el){
+    const r = el.getBoundingClientRect();
+    return r.top < innerHeight && r.bottom > 0;
+  }
+  setTimeout(spawn, 1500);
+})();
+
+/* ============================================================
+   SCENE 7 — FIREWORKS + CONFETTI + FLOATING HEARTS
+   ============================================================ */
+(function(){
+  // Floating hearts
+  const fh = document.getElementById('floatHearts');
+  const hearts = ['❤','♥','💖','💗'];
+  for(let i=0;i<18;i++){
+    const s = document.createElement('span');
+    s.textContent = hearts[i%hearts.length];
+    s.style.left = Math.random()*100+'%';
+    s.style.fontSize = (10 + Math.random()*22)+'px';
+    s.style.animationDuration = (8 + Math.random()*10)+'s';
+    s.style.animationDelay = (Math.random()*8)+'s';
+    fh.appendChild(s);
+  }
+
+  // Fireworks
+  const fc = document.getElementById('fireworks');
+  const fctx = fc.getContext('2d');
+  function resizeFC(){ const r = fc.parentElement.getBoundingClientRect(); fc.width=r.width; fc.height=r.height; }
+  resizeFC(); addEventListener('resize', resizeFC);
+
+  let particles = [];
+  function burst(x,y){
+    const colors = ['#ff6fb5','#ffb3d9','#a855f7','#f5c97b','#ffffff'];
+    const n = 40;
+    for(let i=0;i<n;i++){
+      const ang = (Math.PI*2/n)*i;
+      const sp = 2 + Math.random()*3;
+      particles.push({
+        x, y,
+        vx: Math.cos(ang)*sp, vy: Math.sin(ang)*sp,
+        life: 60 + Math.random()*30,
+        c: colors[Math.floor(Math.random()*colors.length)]
+      });
+    }
+  }
+  let fwActive = false;
+  const scene7 = document.getElementById('scene7');
+  const fwIO = new IntersectionObserver((es)=>{
+    es.forEach(e => fwActive = e.isIntersecting);
+  },{threshold:.3});
+  fwIO.observe(scene7);
+
+  function loop(){
+    fctx.fillStyle = 'rgba(10,4,19,0.18)';
+    fctx.fillRect(0,0,fc.width,fc.height);
+    if(fwActive && Math.random()<0.04){
+      burst(Math.random()*fc.width, Math.random()*fc.height*0.6+20);
+    }
+    particles.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy; p.vy+=0.04; p.life--;
+      fctx.beginPath();
+      fctx.fillStyle = p.c;
+      fctx.globalAlpha = Math.max(0, p.life/80);
+      fctx.arc(p.x,p.y,2.2,0,Math.PI*2); fctx.fill();
+    });
+    fctx.globalAlpha=1;
+    particles = particles.filter(p=>p.life>0);
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  // Confetti
+  const cc = document.getElementById('confetti');
+  const cctx = cc.getContext('2d');
+  function resizeCC(){ const r = cc.parentElement.getBoundingClientRect(); cc.width=r.width; cc.height=r.height; }
+  resizeCC(); addEventListener('resize', resizeCC);
+  let conf = [];
+  function spawnConfetti(){
+    if(!fwActive) return;
+    for(let i=0;i<3;i++){
+      conf.push({
+        x: Math.random()*cc.width,
+        y: -10,
+        vy: 1+Math.random()*2,
+        vx: Math.random()*2-1,
+        r: 4+Math.random()*4,
+        rot: Math.random()*Math.PI,
+        vr: (Math.random()-.5)*.2,
+        c: ['#ff6fb5','#a855f7','#f5c97b','#ffb3d9'][Math.floor(Math.random()*4)]
+      });
+    }
+  }
+  setInterval(spawnConfetti, 120);
+  function confLoop(){
+    cctx.clearRect(0,0,cc.width,cc.height);
+    conf.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr;
+      cctx.save(); cctx.translate(p.x,p.y); cctx.rotate(p.rot);
+      cctx.fillStyle=p.c;
+      cctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*0.5);
+      cctx.restore();
+    });
+    conf = conf.filter(p=>p.y < cc.height+20);
+    requestAnimationFrame(confLoop);
+  }
+  confLoop();
+})();
+
+/* ============================================================
+   SCENE 8 — SURPRISE
+   ============================================================ */
+(function(){
+  const btn = document.getElementById('surpriseBtn');
+  const overlay = document.getElementById('surprise-overlay');
+  const heartRain = document.getElementById('heartRain');
+  const audio = document.getElementById('bgm');
+  const close = document.getElementById('closeSurprise');
+
+  function rainHearts(){
+    heartRain.innerHTML = '';
+    const symbols = ['❤','💖','💗','♥','💕'];
+    for(let i=0;i<60;i++){
+      const s = document.createElement('span');
+      s.textContent = symbols[i%symbols.length];
+      s.style.left = Math.random()*100+'%';
+      s.style.fontSize = (14+Math.random()*28)+'px';
+      s.style.animationDuration = (4+Math.random()*5)+'s';
+      s.style.animationDelay = (Math.random()*3)+'s';
+      heartRain.appendChild(s);
+    }
+  }
+  btn.addEventListener('click', ()=>{
+    overlay.classList.add('show');
+    rainHearts();
+    audio.volume = 0.55;
+    audio.play().catch(()=>{ /* user gesture required — already a click, should work */ });
+  });
+  close.addEventListener('click', ()=>{
+    overlay.classList.remove('show');
+    audio.pause();
+  });
+})();
+
+/* ============================================================
+   TOUCH SWIPE — snap to next/prev scene
+   ============================================================ */
+(function(){
+  const main = document.getElementById('main');
+  const scenes = [...document.querySelectorAll('.scene')];
+  let startY=0, startTime=0, locked=false;
+
+  main.addEventListener('touchstart', e=>{
+    startY = e.touches[0].clientY; startTime = Date.now();
+  },{passive:true});
+
+  main.addEventListener('touchend', e=>{
+    if(locked) return;
+    const dy = startY - e.changedTouches[0].clientY;
+    const dt = Date.now() - startTime;
+    if(Math.abs(dy) < 40 || dt > 600) return; // require flick
+    const cur = currentScene();
+    const next = dy > 0 ? Math.min(scenes.length-1, cur+1) : Math.max(0, cur-1);
+    locked = true;
+    scenes[next].scrollIntoView({behavior:'smooth'});
+    setTimeout(()=>locked=false, 700);
+  },{passive:true});
+
+  function currentScene(){
+    const top = main.scrollTop;
+    let idx = 0, best = Infinity;
+    scenes.forEach((s,i)=>{
+      const d = Math.abs(s.offsetTop - top);
+      if(d < best){best=d; idx=i;}
+    });
+    return idx;
+  }
+})();
+</script>
+</body>
+</html>
